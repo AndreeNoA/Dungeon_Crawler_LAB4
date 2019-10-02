@@ -41,7 +41,7 @@ namespace DungeonCrawlerVersion61
                 {
                     //Console.WriteLine("Invalid movement");
                     //Console.ReadKey();
-                    Console.Clear();
+                    //Console.Clear();
                     Console.WriteLine("Invalid movement");
                     Console.ReadKey();
                     Console.Clear();

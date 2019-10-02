@@ -7,34 +7,35 @@
             switch (movementDirection)
             {
                 case 'W':
-                    if (map[playerPositionHorizontal, playerPositionVertical - 1] == '#')
+                    if (map[playerPositionVertical - 1, playerPositionHorizontal] == '#')
                     {
                         return false;
                     }
                     else
                         return true;
                 case 'S':
-                    if (map[playerPositionHorizontal, playerPositionVertical + 1] == '#')
+                    if (map[playerPositionVertical + 1, playerPositionHorizontal] == '#')
                     {
                         return false;
                     }
                     else
                         return true;
                 case 'A':
-                    if (map[playerPositionHorizontal - 1, playerPositionVertical] == '#')
+                    if (map[playerPositionVertical, playerPositionHorizontal - 1] == '#')
                     {
                         return false;
                     }
                     else
                         return true;
                 case 'D':
-                    if (map[playerPositionHorizontal + 1, playerPositionVertical] == '#')
+                    if (map[playerPositionVertical, playerPositionHorizontal + 1] == '#')
                     {
                         return false;
                     }
                     else
                         return true;
                 default:
+                    
                     return false;
             }
         }
