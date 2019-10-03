@@ -3,6 +3,7 @@
     internal class ValidMovement
     {
         public bool IsMovementValid(char movementDirection, int playerPositionHorizontal, int playerPositionVertical, char[,] map, ref int playerHealthPoints)
+
         {
             switch (movementDirection)
             {
