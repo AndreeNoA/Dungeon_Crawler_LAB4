@@ -59,6 +59,7 @@ namespace DungeonCrawlerVersion61
                         break;
                     case 'T':
                         Console.WriteLine("Trap");
+                        trap.trapee(ref player.playerHealthPoints);
                         break;
                     case 'C':
                         Console.WriteLine("Chest");
