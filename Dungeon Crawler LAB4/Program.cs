@@ -13,10 +13,14 @@ namespace DungeonCrawlerVersion61
             Map map = new Map();
             PlayerInput playerInput = new PlayerInput();
             Player player = new Player(); // hp, mp, inventory, player position
-            ValidMovement validMovement = new ValidMovement(); //check if move is possible (not walking into walls etc) 
+            ValidMovement validMovement = new ValidMovement(); 
             OutputMap outputMap = new OutputMap();
             CheckRoom checkRoom = new CheckRoom(); // check what kind of room it is, and send back info to main
             EndOfGame endOfGame = new EndOfGame(); // run win or lose method
+            MonsterRoom monsterRoom = new MonsterRoom();
+            ChestRoom chestRoom = new ChestRoom();
+            Door door = new Door();
+            Trap trap = new Trap();
 
             Console.WriteLine("Welcome to dungeon crawler!\nPress any key to start");
             Console.ReadKey();
@@ -32,21 +36,37 @@ namespace DungeonCrawlerVersion61
                  */
                 outputMap.PrintMap(player.playerPositionHorizontal, player.playerPositionVertical);
                 var inputDirection = playerInput.PlayerMovementInput();
-                if (validMovement.IsMovementValid(inputDirection, player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares))
+                if (validMovement.IsMovementValid(inputDirection, player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares, ref player.playerHealthPoints))
                 {
                     player.PlayerMove(inputDirection);
                     Console.Clear();
                 }
                 else
                 {
-                    //Console.WriteLine("Invalid movement");
-                    //Console.ReadKey();
-                    //Console.Clear();
-                    Console.WriteLine("Invalid movement");
+                    Console.WriteLine("You lost hp" + player.playerHealthPoints);
                     Console.ReadKey();
                     Console.Clear();
                 }
-                //checkRoom.Checkroom();//check player.Position to determine what room    
+
+                char room = checkRoom.RoomCheck(player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares, ref player.playerHealthPoints);
+                switch (room)
+                {
+                    case 'M':
+                        monsterRoom.MonsterType(player.playerPositionHorizontal, player.playerPositionVertical, ref player.playerHealthPoints);
+                        break;
+                    case 'D':
+                        Console.WriteLine("Door");
+                        break;
+                    case 'T':
+                        Console.WriteLine("Trap");
+                        break;
+                    case 'C':
+                        Console.WriteLine("Chest");
+                        break;
+                    case 'E':
+                        Console.WriteLine("End");
+                        break;
+                }
             }
             while (player.playerHealthPoints > 0);
 

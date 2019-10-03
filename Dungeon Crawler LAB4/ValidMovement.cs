@@ -2,13 +2,14 @@
 {
     internal class ValidMovement
     {
-        public bool IsMovementValid(char movementDirection, int playerPositionHorizontal, int playerPositionVertical, char[,] map)
+        public bool IsMovementValid(char movementDirection, int playerPositionHorizontal, int playerPositionVertical, char[,] map, ref int playerHealthPoints)
         {
             switch (movementDirection)
             {
                 case 'W':
                     if (map[playerPositionVertical - 1, playerPositionHorizontal] == '#')
                     {
+                        playerHealthPoints--;
                         return false;
                     }
                     else
@@ -16,6 +17,7 @@
                 case 'S':
                     if (map[playerPositionVertical + 1, playerPositionHorizontal] == '#')
                     {
+                        playerHealthPoints--;
                         return false;
                     }
                     else
@@ -23,13 +25,15 @@
                 case 'A':
                     if (map[playerPositionVertical, playerPositionHorizontal - 1] == '#')
                     {
+                        playerHealthPoints--;
                         return false;
                     }
                     else
                         return true;
-                case 'D':
+                 case 'D':
                     if (map[playerPositionVertical, playerPositionHorizontal + 1] == '#')
                     {
+                        playerHealthPoints--;
                         return false;
                     }
                     else
