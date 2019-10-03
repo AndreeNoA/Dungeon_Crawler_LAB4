@@ -2,7 +2,8 @@
 {
     internal class ValidMovement
     {
-        public bool IsMovementValid(char movementDirection, int playerPositionHorizontal, int playerPositionVertical, char[,] map,ref int playerHealthPoints)
+        public bool IsMovementValid(char movementDirection, int playerPositionHorizontal, int playerPositionVertical, char[,] map, ref int playerHealthPoints)
+
         {
             switch (movementDirection)
             {
@@ -30,7 +31,7 @@
                     }
                     else
                         return true;
-                case 'D':
+                 case 'D':
                     if (map[playerPositionVertical, playerPositionHorizontal + 1] == '#')
                     {
                         playerHealthPoints--;
