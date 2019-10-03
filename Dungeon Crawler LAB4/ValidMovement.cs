@@ -10,7 +10,7 @@
                 case 'W':
                     if (map[playerPositionVertical - 1, playerPositionHorizontal] == '#')
                     {
-                        playerHealthPoints--;
+                        playerHealthPoints = playerHealthPoints - 5;
                         return false;
                     }
                     else
@@ -18,7 +18,7 @@
                 case 'S':
                     if (map[playerPositionVertical + 1, playerPositionHorizontal] == '#')
                     {
-                        playerHealthPoints--;
+                        playerHealthPoints = playerHealthPoints - 5;
                         return false;
                     }
                     else
@@ -26,7 +26,7 @@
                 case 'A':
                     if (map[playerPositionVertical, playerPositionHorizontal - 1] == '#')
                     {
-                        playerHealthPoints--;
+                        playerHealthPoints = playerHealthPoints - 5;
                         return false;
                     }
                     else
@@ -34,7 +34,7 @@
                  case 'D':
                     if (map[playerPositionVertical, playerPositionHorizontal + 1] == '#')
                     {
-                        playerHealthPoints--;
+                        playerHealthPoints = playerHealthPoints - 5;
                         return false;
                     }
                     else
@@ -46,10 +46,4 @@
         }
 
     }
-
-    //if (validMovement.IsMovementValid(inputDirection, player.Position, map.Map))
-    //{
-    //player.PlayerMove(inputDirection); // change player position in player class
-    //}
-    //else
 }

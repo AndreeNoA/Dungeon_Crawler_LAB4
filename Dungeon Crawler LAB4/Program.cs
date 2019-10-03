@@ -10,17 +10,23 @@ namespace DungeonCrawlerVersion61
     {
         static void Main(string[] args)
         {
+            //pjäser och spelplanen:
             Map map = new Map();
-            PlayerInput playerInput = new PlayerInput();
+            //Map map = Map.CreateMap();
             Player player = new Player(); // hp, mp, inventory, player position
-            ValidMovement validMovement = new ValidMovement(); 
-            OutputMap outputMap = new OutputMap();
-            CheckRoom checkRoom = new CheckRoom(); // check what kind of room it is, and send back info to main
-            EndOfGame endOfGame = new EndOfGame(); // run win or lose method
             MonsterRoom monsterRoom = new MonsterRoom();
             ChestRoom chestRoom = new ChestRoom();
             Door door = new Door();
             Trap trap = new Trap();
+
+            //Vilkor / regler kring spelet:
+            PlayerInput playerInput = new PlayerInput();
+            CheckRoom checkRoom = new CheckRoom(); // check what kind of room it is, and send back info to main
+            EndOfGame endOfGame = new EndOfGame(); // run win or lose method
+            ValidMovement validMovement = new ValidMovement(); 
+
+            //Grafik till spelet:
+            OutputMap outputMap = new OutputMap();
 
             Console.WriteLine("Welcome to dungeon crawler!\nPress any key to start");
             Console.ReadKey();
@@ -28,12 +34,6 @@ namespace DungeonCrawlerVersion61
 
             do
             {
-                /*
-                 *  Check if movement is valid
-                 *  Move player to room //DONE
-                 *  Check what kind of room
-                 *  Run room (Return new info to player class
-                 */
                 outputMap.PrintMap(player.playerPositionHorizontal, player.playerPositionVertical);
                 var inputDirection = playerInput.PlayerMovementInput();
                 if (validMovement.IsMovementValid(inputDirection, player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares, ref player.playerHealthPoints))
@@ -48,11 +48,12 @@ namespace DungeonCrawlerVersion61
                     Console.Clear();
                 }
 
+                player.PlayerDamage(player.sword1, player.sword2); //Updating player damage, checking inventory for swords
                 char room = checkRoom.RoomCheck(player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares, ref player.playerHealthPoints);
                 switch (room)
                 {
                     case 'M':
-                        monsterRoom.MonsterType(player.playerPositionHorizontal, player.playerPositionVertical, ref player.playerHealthPoints);
+                        monsterRoom.MonsterType(player.playerPositionHorizontal, player.playerPositionVertical, ref player.playerHealthPoints, player.playerAttackDamage);
                         break;
                     case 'D':
                         Console.WriteLine("Door");

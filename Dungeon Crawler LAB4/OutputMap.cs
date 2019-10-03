@@ -8,8 +8,20 @@ namespace DungeonCrawlerVersion61
 {
     internal class OutputMap : Map
     {
+        //public void PrintMap(Map map)
+        //{
+        //    for (int i = 0; i < map.RowSize; i++)
+        //    {
+        //        for (int j = 0; j < map.ColumnSize; j++)
+        //        {
+        //            Console.Write(map.GetObjectAt(i, j).Symbol);
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //}
         public void PrintMap(int playerPositionHorizontal, int playerPositionVertical)
         {
+            
             //Copying from explored map to show whats around the player
             squares[playerPositionVertical, playerPositionHorizontal - 1] = exploredSquares[playerPositionVertical, playerPositionHorizontal - 1];
             squares[playerPositionVertical - 1, playerPositionHorizontal] = exploredSquares[playerPositionVertical - 1, playerPositionHorizontal];
