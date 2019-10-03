@@ -32,7 +32,7 @@ namespace DungeonCrawlerVersion61
                  */
                 outputMap.PrintMap(player.playerPositionHorizontal, player.playerPositionVertical);
                 var inputDirection = playerInput.PlayerMovementInput();
-                if (validMovement.IsMovementValid(inputDirection, player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares))
+                if (validMovement.IsMovementValid(inputDirection, player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares, ref player.playerHealthPoints))
                 {
                     player.PlayerMove(inputDirection);
                     Console.Clear();
