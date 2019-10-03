@@ -47,7 +47,10 @@
     <Compile Include="ChestRoom.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="EndOfGame.cs" />
+    <Compile Include="FightMonster.cs" />
+    <Compile Include="IFightMonster.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="Monster.cs" />
     <Compile Include="MonsterRoom.cs" />
     <Compile Include="OutputMap.cs" />
     <Compile Include="Player.cs" />
