@@ -11,67 +11,42 @@ namespace DungeonCrawlerVersion61
         static void Main(string[] args)
         {
             //pjäser och spelplanen:
-            Map map = new Map();
+            Map map = Map.CreateMap();
             //Map map = Map.CreateMap();
             Player player = new Player(); // hp, mp, inventory, player position
-            MonsterRoom monsterRoom = new MonsterRoom();
-            ChestRoom chestRoom = new ChestRoom();
-            Door door = new Door();
-            Trap trap = new Trap();
+            
 
             //Vilkor / regler kring spelet:
-            PlayerInput playerInput = new PlayerInput();
-            CheckRoom checkRoom = new CheckRoom(); // check what kind of room it is, and send back info to main
-            EndOfGame endOfGame = new EndOfGame(); // run win or lose method
-            ValidMovement validMovement = new ValidMovement(); 
+            //PlayerInput playerInput = new PlayerInput();
+            //CheckRoom checkRoom = new CheckRoom(); // check what kind of room it is, and send back info to main
+            //EndOfGame endOfGame = new EndOfGame(); // run win or lose method
+            //ValidMovement validMovement = new ValidMovement(); //klasser bör vara subjektiv inte verb. 
 
             //Grafik till spelet:
-            OutputMap outputMap = new OutputMap();
+            //OutputMap outputMap = new OutputMap();
 
             Console.WriteLine("Welcome to dungeon crawler!\nPress any key to start");
-            Console.ReadKey();
-            Console.Clear();
+            //Console.Read();
+            //Console.Clear();
 
             do
             {
-                outputMap.PrintMap(player.playerPositionHorizontal, player.playerPositionVertical);
-                var inputDirection = playerInput.PlayerMovementInput();
-                if (validMovement.IsMovementValid(inputDirection, player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares, ref player.playerHealthPoints))
-                {
-                    player.PlayerMove(inputDirection);
-                    Console.Clear();
-                }
-                else
-                {
-                    Console.WriteLine("You lost hp" + player.playerHealthPoints);
-                    Console.ReadKey();
-                    Console.Clear();
-                }
+                //Console.WriteLine(player.playerHealthPoints);
 
-                player.PlayerDamage(player.sword1, player.sword2); //Updating player damage, checking inventory for swords
-                char room = checkRoom.RoomCheck(player.playerPositionHorizontal, player.playerPositionVertical, map.exploredSquares, ref player.playerHealthPoints);
-                switch (room)
-                {
-                    case 'M':
-                        monsterRoom.MonsterType(player.playerPositionHorizontal, player.playerPositionVertical, ref player.playerHealthPoints, player.playerAttackDamage);
-                        break;
-                    case 'D':
-                        Console.WriteLine("Door");
-                        break;
-                    case 'T':
-                        Console.WriteLine("Trap");
-                        break;
-                    case 'C':
-                        Console.WriteLine("Chest");
-                        break;
-                    case 'E':
-                        Console.WriteLine("End");
-                        break;
-                }
-            }
-            while (player.playerHealthPoints > 0);
+                map.PrintMap(player);
+                player.PlayerMove(map, player);
+                //validMovement.IsMovementValid(player.PlayerMove(dire), player.playerPositionHorizontal, player.playerPositionVertical, ref player.playerHealthPoints );
 
-            endOfGame.EndGame(player.playerHealthPoints);
+                //player.DidPlayerHitGameObject();
+                //Verifiera om användaren har hamnat på något GameObject
+
+                //Kör Action() på det gameObjectet
+                Console.Clear();
+
+            } while (true);
+            
+
+     
         }
     }
 }

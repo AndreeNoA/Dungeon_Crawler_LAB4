@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawlerVersion61
 {
-    internal class Player
+    public class Player 
     {
-        public int playerHealthPoints = 500;
-        
-        public int playerPositionHorizontal = 1;
-        public int playerPositionVertical = 1;
+
+        public Position position { get; set; }
+
+        public int playerHealthPoints = 50000;        
         public int playerAttackDamage = 5;
         public bool sword1 = false;
         public bool sword2 = false;
+
+        public Player()
+        {
+            position = new Position(1, 1);
+        }
 
         public int PlayerDamage (bool sword1, bool sword2)
         {
@@ -34,30 +39,69 @@ namespace DungeonCrawlerVersion61
                 return playerAttackDamage = 5;
         }
 
-        public void PlayerMove(char movementDirection)
+        public void PlayerMove(Map map, Player player)
         {
-            switch (movementDirection)
+            while (true)
             {
-                case 'W':
-                    playerPositionVertical--;
-                    break;
-                case 'D':
-                    playerPositionHorizontal++;
-                    break;
-                case 'S':
-                    playerPositionVertical++;
-                    break;
-                case 'A':
-                    playerPositionHorizontal--;
-                    break;
-                //case ConsoleKey.Q:        TODO
-                //use health pot
-                //case ConsoleKey.E:
-                //use mana pot
-                default:
-                    Console.WriteLine("Use WASD to move");
-                    break;
-            }
+                var input = Console.ReadKey();
+
+                if (!IsValidMovementInput(input.Key))
+                {
+                    Console.WriteLine("Invalid input..");
+                    continue;
+                }
+
+                var newPosition = GetNewPositionFromMovement(input.Key, this.position);
+
+                if (map.IsWallOnPosition(newPosition))
+                {
+                    Console.WriteLine("You hit a wall and lost 5 HP.");
+                    this.playerHealthPoints -= 15;
+                    return;
+                }
+                else if (map.IsMonsterOnPosition(newPosition, player))
+                {
+                    
+                }else if(map.IsHPPotOnPosition(newPosition, player))
+                {
+
+                }
+
+
+
+                this.position = newPosition;
+                playerHealthPoints -= 5;
+                return;             
+            }            
         }
+
+        private bool IsValidMovementInput(ConsoleKey input)
+        {
+            return input == ConsoleKey.W || input == ConsoleKey.D || input == ConsoleKey.S || input == ConsoleKey.A;
+        }
+
+        private Position GetNewPositionFromMovement(ConsoleKey input, Position pos)
+        {
+            switch (input)
+            {
+                case ConsoleKey.W:
+                    return new Position(pos.Horizontal, pos.Vertical - 1);
+                    
+                case ConsoleKey.D:
+                    return new Position(pos.Horizontal + 1, pos.Vertical);
+                    
+                case ConsoleKey.S:
+                    return new Position(pos.Horizontal, pos.Vertical + 1);
+                    
+                case ConsoleKey.A:
+                    return new Position(pos.Horizontal -1, pos.Vertical);
+                    
+            }
+            //This should never happend...
+            return new Position(1, 1);
+        }
+
+
+
     }
 }
