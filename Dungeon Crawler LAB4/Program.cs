@@ -10,9 +10,16 @@ namespace DungeonCrawlerVersion61
     {
         static void Main(string[] args)
         {
+
+            /*  TODO
+             *      Hide what atleast 1 room contains.
+             *      Fix EndofGame
+             *      Clean up the code
+             */
+                
+
             //pjäser och spelplanen:
             Map map = Map.CreateMap();
-            //Map map = Map.CreateMap();
             Player player = new Player(); // hp, mp, inventory, player position
             
 

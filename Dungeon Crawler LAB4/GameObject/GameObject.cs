@@ -32,5 +32,14 @@ namespace DungeonCrawlerVersion61
 
         }
 
+        public virtual void GetKeyFromChest(Player player)
+        {
+
+        }
+
+        public virtual void TryOpenDoor(Player player)
+        {
+        
+        }
     }
 }

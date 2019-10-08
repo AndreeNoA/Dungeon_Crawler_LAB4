@@ -14,5 +14,23 @@ namespace DungeonCrawlerVersion61
         {
             return Symbol;
         }
+
+        //public override void TryOpenDoor(Player player)
+        //{
+        //    //Console.WriteLine(player.position.Horizontal); // 1
+        //    //Console.WriteLine(player.position.Vertical); // 5
+        //    //Console.ReadKey();
+        //    //if ()
+        //    //{
+        //    //    Console.WriteLine("Normal door");
+        //    //    Console.ReadKey();
+        //    //}
+        //    //if (player.normalKey == true)
+        //    //{
+        //    //    return true;
+        //    //}
+        //    //return false;
+        //
+        //}
     }
 }
