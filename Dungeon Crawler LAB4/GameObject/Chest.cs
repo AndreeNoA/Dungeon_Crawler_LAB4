@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawlerVersion61
 {
-    class BlueChest : GameObject
+    class Chest : GameObject
     {
         private const string Symbol = "C";
 
-        public BlueChest(int h, int v) : base(h, v)
+        public Chest(int h, int v) : base(h, v)
         {
 
         }
@@ -21,9 +21,6 @@ namespace DungeonCrawlerVersion61
 
         public override void GetKeyFromChest(Player player)
         {
-            //Console.WriteLine(player.position.Horizontal); // 1
-            //Console.WriteLine(player.position.Vertical); // 5
-            //Console.ReadKey();
             if (player.position.Horizontal == 1 && player.position.Vertical == 5)
             {
                 Console.WriteLine("Normal key");

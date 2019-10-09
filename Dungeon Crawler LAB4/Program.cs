@@ -16,44 +16,22 @@ namespace DungeonCrawlerVersion61
              *      Fix EndofGame
              *      Clean up the code
              */
-                
 
-            //pjäser och spelplanen:
             Map map = Map.CreateMap();
-            Player player = new Player(); // hp, mp, inventory, player position
+            Player player = new Player();
             
-
-            //Vilkor / regler kring spelet:
-            //PlayerInput playerInput = new PlayerInput();
-            //CheckRoom checkRoom = new CheckRoom(); // check what kind of room it is, and send back info to main
             //EndOfGame endOfGame = new EndOfGame(); // run win or lose method
-            //ValidMovement validMovement = new ValidMovement(); //klasser bör vara subjektiv inte verb. 
-
-            //Grafik till spelet:
-            //OutputMap outputMap = new OutputMap();
 
             Console.WriteLine("Welcome to dungeon crawler!\nPress any key to start");
-            //Console.Read();
-            //Console.Clear();
 
             do
             {
-                //Console.WriteLine(player.playerHealthPoints);
-
+                Console.WriteLine("Your current healthpoints is " + player.playerHealthPoints);
                 map.PrintMap(player);
                 player.PlayerMove(map, player);
-                //validMovement.IsMovementValid(player.PlayerMove(dire), player.playerPositionHorizontal, player.playerPositionVertical, ref player.playerHealthPoints );
-
-                //player.DidPlayerHitGameObject();
-                //Verifiera om användaren har hamnat på något GameObject
-
-                //Kör Action() på det gameObjectet
                 Console.Clear();
 
-            } while (true);
-            
-
-     
+            } while (true);                 
         }
     }
 }
