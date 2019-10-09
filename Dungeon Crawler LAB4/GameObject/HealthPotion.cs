@@ -21,6 +21,7 @@ namespace DungeonCrawlerVersion61
 
         public override void GetHealthPotion(Player player)
         {
+            Console.Clear();
             Random rnd = new Random();
             int randomNumber = rnd.Next(1, 4);
             int healthPotionSize = 0;
@@ -41,7 +42,7 @@ namespace DungeonCrawlerVersion61
                 healthPotionSize = 100;
             }
             player.playerHealthPoints = player.playerHealthPoints + healthPotionSize;
-            Console.WriteLine("You incresed your health with " + healthPotionSize + "healthpoints");
+            Console.WriteLine("You incresed your health with " + healthPotionSize + " healthpoints");
             Console.WriteLine("Your current healthpoints is " + player.playerHealthPoints);
 
             Console.ReadKey();

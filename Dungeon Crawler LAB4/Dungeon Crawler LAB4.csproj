@@ -53,6 +53,7 @@
     <Compile Include="FightMonster.cs" />
     <Compile Include="GameObject\GameObject.cs" />
     <Compile Include="GameObject\Goal.cs" />
+    <Compile Include="Monsters\FightingMonsters.cs" />
     <Compile Include="Monsters\IFightMonster.cs" />
     <Compile Include="GameObject\InnerWall.cs" />
     <Compile Include="Map.cs" />

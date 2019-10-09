@@ -11,8 +11,8 @@ namespace DungeonCrawlerVersion61
 
         public Position position { get; set; }
 
-        public int playerHealthPoints = 50000;        
-        public int playerAttackDamage = 5;
+        public int playerHealthPoints = 500;        
+        public  int playerAttackDamage = 5;
         public bool sword1 = false;
         public bool sword2 = false;
 
@@ -21,19 +21,19 @@ namespace DungeonCrawlerVersion61
             position = new Position(1, 1);
         }
 
-        public int PlayerDamage (bool sword1, bool sword2)
+        public  int PlayerDamage ()
         {
             if (sword1 == true && sword2 == true)
             {
-                return playerAttackDamage = 12;
+                return playerAttackDamage = 12 ;
             }
             else if (sword1 == true)
             {
-                return playerAttackDamage = 10;
+                return playerAttackDamage = 8;
             }
             else if (sword2 == true)
             {
-                return playerAttackDamage = 7;
+                return playerAttackDamage = 7 ;
             }
             else
                 return playerAttackDamage = 5;
@@ -59,13 +59,15 @@ namespace DungeonCrawlerVersion61
                     this.playerHealthPoints -= 15;
                     return;
                 }
-                else if (map.IsMonsterOnPosition(newPosition, player))
-                {
-                    
-                }else if(map.IsHPPotOnPosition(newPosition, player))
-                {
+                if (map.IsMonsterOnPosition(newPosition, player));
+                
+                if(map.IsHPPotOnPosition(newPosition, player));
 
-                }
+                if (map.IsTrapOnPosition(newPosition, player));
+
+
+
+
 
 
 

@@ -31,6 +31,11 @@ namespace DungeonCrawlerVersion61
         {
 
         }
+        public virtual void WalkingOnTrap(Player player)
+        {
+
+        }
+
 
     }
 }

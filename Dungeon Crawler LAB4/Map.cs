@@ -107,6 +107,7 @@ namespace DungeonCrawlerVersion61
         }
         public bool IsMonsterOnPosition(Position pos, Player player)
         {
+            
             var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
 
             if(gameObject != null && gameObject.GetSymbol() == "M")
@@ -128,6 +129,17 @@ namespace DungeonCrawlerVersion61
                 gameObject.GetHealthPotion(player);
 
                 gameObjects.Remove(gameObject);
+                return true;
+            }
+            return false;
+        }public bool IsTrapOnPosition(Position pos, Player player)
+        {
+            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
+
+            if (gameObject != null && gameObject.GetSymbol() == "T")
+            {
+                gameObject.WalkingOnTrap(player);
+
                 return true;
             }
             return false;

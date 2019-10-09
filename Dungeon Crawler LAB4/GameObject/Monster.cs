@@ -26,33 +26,38 @@ namespace DungeonCrawlerVersion61
 
         public override void Action(Player player)
         {
+            Console.Clear();
             Random rnd = new Random();
             int randomNumber = rnd.Next(1, 4);
-            IFightMonster monster;
-            
+            player.PlayerDamage();
+            // IFightMonster monster;
+
             if (randomNumber == 1)
             {
 
-                Console.WriteLine("2");
 
-                monster = new Dragon(10,10,"Dragon");
-                monster.Fight(player);
+                IFightMonster Giant = new FightingMonsters(2,10, "Giant");
 
+                Giant.Fight(player);
+                            
             }
             else if(randomNumber == 2)
             {
-                Dragon snake = new Dragon(10, 55, "Snake");
-                snake.Fight(player);
+                IFightMonster MonsterSnake = new FightingMonsters(5, 20, "Monster Snake");
+                MonsterSnake.Fight(player);
+                player.sword1 = true;
             }
             else if (randomNumber == 3)
             {
-                Dragon dog = new Dragon(110, 155, "Dog");
-                dog.Fight(player);
+                IFightMonster MonsterCat = new FightingMonsters(10, 10, "Monster Cat");
+                MonsterCat.Fight(player);
+                player.sword2 = true;
             }
             else if (randomNumber == 4)
             {
-                Dragon johan = new Dragon(110, 155, "Dog");
-                johan.Fight(player);
+                IFightMonster MonsterDragon = new FightingMonsters(8, 15, "Monster Dragon");
+                MonsterDragon.Fight(player);
+                
             }
             Console.ReadKey();
             
@@ -64,7 +69,7 @@ namespace DungeonCrawlerVersion61
 
 
 
-        }
+       }
 
       
 

@@ -15,6 +15,16 @@ namespace DungeonCrawlerVersion61
         {
             return Symbol;
         }
+        public override void WalkingOnTrap(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine("You just walked on a trap and lost 50 healthpoints");
+
+            player.playerHealthPoints = player.playerHealthPoints - 50;
+            Console.ReadKey();
+
+
+        }
 
     }
 }
