@@ -15,16 +15,13 @@ namespace DungeonCrawlerVersion61
         public int playerAttackDamage = 5;
         public bool sword1 = false;
         public bool sword2 = false;
-        public bool redKey = false;
-        public bool blueKey = false;
-        public bool normalKey = false;
 
         public Player()
         {
             position = new Position(1, 1);
         }
 
-        public int PlayerDamage ()
+        public int PlayerDamage (bool sword1, bool sword2)
         {
             if (sword1 == true && sword2 == true)
             {
@@ -32,7 +29,7 @@ namespace DungeonCrawlerVersion61
             }
             else if (sword1 == true)
             {
-                return playerAttackDamage = 8;
+                return playerAttackDamage = 10;
             }
             else if (sword2 == true)
             {
@@ -60,32 +57,19 @@ namespace DungeonCrawlerVersion61
                 {
                     Console.WriteLine("You hit a wall and lost 5 HP.");
                     this.playerHealthPoints -= 15;
-                    Console.WriteLine(playerHealthPoints);
-                    Console.ReadKey();
                     return;
                 }
                 else if (map.IsMonsterOnPosition(newPosition, player))
                 {
-
-                }
-                else if (map.IsHealthPotOnPosition(newPosition, player))
-                {
-
-                }
-                else if (map.IsChestOnPosition(newPosition, player))
-                {
-
-                }
-                else if (map.IsDoorOnPosition(newPosition, player))
-                {
-                    return;
-                }
-                else if (map.IsTrapOnPosition(newPosition, player))
+                    
+                }else if(map.IsHPPotOnPosition(newPosition, player))
                 {
 
                 }
 
-                        this.position = newPosition;
+
+
+                this.position = newPosition;
                 playerHealthPoints -= 5;
                 return;             
             }            
