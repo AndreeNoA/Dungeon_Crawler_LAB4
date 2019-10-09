@@ -32,19 +32,5 @@ namespace DungeonCrawlerVersion61
 
         }
 
-        public virtual void GetKeyFromChest(Player player)
-        {
-
-        }
-
-        public virtual void TryOpenDoor(Position pos,Player player)
-        {
-        
-        }
-
-        public virtual void WalkingOnTrap(Player player)
-        {
-
-        }
     }
 }

@@ -14,15 +14,18 @@ namespace DungeonCrawlerVersion61
                                                                     {'#' , ' ' , 'D' , ' ' , ' ' , ' ' , 'I' , ' ' , 'C' , 'I' , 'G' , '#'},
                                                                     {'#' , ' ' , 'T' , ' ' , 'I' , 'I' , 'I' , 'D' , 'I' , 'I' , ' ' , '#'},
                                                                     {'#' , 'M' , 'I' , 'I' , 'I' , ' ' , ' ' , ' ' , 'I' , 'H' , ' ' , '#'},
-                                                                    {'#' , 'C' , 'I' , ' ' , ' ' , ' ' , 'I' , 'T' , ' ' , 'I' , ' ' , '#'},
+                                                                    {'#' , 'G' , 'I' , ' ' , ' ' , ' ' , 'I' , 'T' , ' ' , 'I' , ' ' , '#'},
                                                                     {'#' , 'I' , 'I' , ' ' , 'I' , 'I' , 'I' , ' ' , ' ' , 'I' , ' ' , '#'},
                                                                     {'#' , ' ' , ' ' , ' ' , 'I' , ' ' , 'D' , ' ' , ' ' , 'I' , ' ' , '#'},
                                                                     {'#' , 'M' , 'I' , ' ' , 'I' , ' ' , 'I' , 'I' , ' ' , 'I' , 'D' , '#'},
-                                                                    {'#' , 'C' , 'I' , ' ' , ' ' , ' ' , 'C' , 'I' , ' ' , 'M' , ' ' , '#'},
+                                                                    {'#' , 'B' , 'I' , ' ' , ' ' , ' ' , 'R' , 'I' , ' ' , 'M' , ' ' , '#'},
                                                                     {'#' , '#' , '#' , '#' , '#' , '#' , '#' , '#' , '#' , '#' , '#' , '#'} };
 
 
 
+
+        //private int rowSize { get; set; }
+        //private int columnSize { get; set; }
         private List<GameObject> gameObjects { get; set; }
 
         public void PrintMap(Player player)
@@ -49,7 +52,6 @@ namespace DungeonCrawlerVersion61
                         }
                         else
                         {
-                            // Changing InnerWall to Wall after its printed first time to make it stay on map
                             Console.Write(gameObject.GetSymbol());
                             if (gameObject is InnerWall)
                             {
@@ -113,15 +115,16 @@ namespace DungeonCrawlerVersion61
                 gameObjects.Remove(gameObject);                
                 return true;
             }
-            return false;
-        }
+            
 
-        public bool IsHealthPotOnPosition(Position pos, Player player)
+            return false;
+        }public bool IsHPPotOnPosition(Position pos, Player player)
         {
             var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
 
             if (gameObject != null && gameObject.GetSymbol() == "H")
             {
+
                 gameObject.GetHealthPotion(player);
 
                 gameObjects.Remove(gameObject);
@@ -130,77 +133,12 @@ namespace DungeonCrawlerVersion61
             return false;
         }
 
-        public bool IsChestOnPosition(Position pos, Player player)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-
-            if (gameObject != null && gameObject.GetSymbol() == "C")
-            {
-                gameObject.GetKeyFromChest(player);
-
-                gameObjects.Remove(gameObject);
-                return true;
-            }
-            return false;
-        }
-
-        public bool IsDoorOnPosition(Position pos, Player player)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-
-            if (gameObject != null && gameObject.GetSymbol() == "D")
-            {
-
-                //gameObject.TryOpenDoor(pos,player);
-
-                //return true;
-                //}
-                //return false;
-                if (pos.Horizontal == 2 && pos.Vertical == 3 && player.normalKey == true || pos.Horizontal == 7 && pos.Vertical == 4 && player.normalKey == true)
-                {
-                    Console.WriteLine("You opened the door");
-                    Console.ReadKey();
-                    player.normalKey = false;
-                    gameObjects.Remove(gameObject);
-                }
-                else if (pos.Horizontal == 6 && pos.Vertical == 8 && player.redKey == true)
-                {
-                    Console.WriteLine("You opened the door");
-                    Console.ReadKey();
-                    player.redKey = false;
-                    gameObjects.Remove(gameObject);
-                }
-                else if (pos.Horizontal == 10 && pos.Vertical == 9 && player.blueKey == true)
-                {
-                    Console.WriteLine("You opened the door");
-                    Console.ReadKey();
-                    player.blueKey = false;
-                    gameObjects.Remove(gameObject);
-                }
-                else
-                {
-                    Console.WriteLine("The door is locked. Go and find a key to open it");
-                    Console.ReadKey();
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool IsTrapOnPosition(Position pos, Player player)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-            if (gameObject != null && gameObject.GetSymbol() == "T")
-            {
-                gameObject.WalkingOnTrap(player);
-                return true;
-            }
-            return false;
-        }
 
         public static Map CreateMap()
         {
             var map = new Map();
+            //map.rowSize = exploredSquares.GetLength(0);
+            //map.columnSize = exploredSquares.GetLength(1);
             map.gameObjects = new List<GameObject>();
             for (int v = 0; v < exploredSquares.GetLength(0); v++)
             {
@@ -222,9 +160,9 @@ namespace DungeonCrawlerVersion61
                     {
                         map.gameObjects.Add(new Monster(h, v));
                     }
-                    else if (exploredSquares[v, h] == 'C')
+                    else if (exploredSquares[v, h] == 'B')
                     {
-                        map.gameObjects.Add(new Chest(h, v));
+                        map.gameObjects.Add(new BlueChest(h, v));
                     }
                     else if (exploredSquares[v, h] == 'H')
                     {
@@ -241,6 +179,10 @@ namespace DungeonCrawlerVersion61
                     else if (exploredSquares[v, h] == 'I')
                     {
                         map.gameObjects.Add(new InnerWall(h, v));
+                    }
+                    else if (exploredSquares[v, h] == 'R')
+                    {
+                        map.gameObjects.Add(new RedChest(h, v));
                     }
                 }                
             }
