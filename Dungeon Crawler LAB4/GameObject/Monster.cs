@@ -2,7 +2,7 @@
 using DungeonCrawlerVersion61.Monsters;
 namespace DungeonCrawlerVersion61
 {
-    class Monster : GameObject
+    class Monster : GameObject, IActionable
     {
         private const string Symbol = "M";
         public Monster(int h, int v) : base(h, v)
@@ -21,24 +21,26 @@ namespace DungeonCrawlerVersion61
             Console.Clear();
             Random rnd = new Random();
             int randomNumber = rnd.Next(1, 4);
-            player.PlayerDamage();
+            player.UpdatePlayerDamage(); //borde heta något med uppdatera
             
             if (randomNumber == 1)
             {
-                IFightMonster Giant = new FightingMonsters(2, 10, "Giant");
+                IFightMonster Giant = new FightingMonsters(2, 10, "Mr Giant");
                 Giant.Fight(player);
             }
             else if (randomNumber == 2)
             {
-                IFightMonster MonsterSnake = new FightingMonsters(5, 20, "Monster Snake");
+                IFightMonster MonsterSnake = new FightingMonsters(5, 20, "Sir Snake");
                 MonsterSnake.Fight(player);
-                player.sword1 = true;
+                Console.WriteLine("When you killed Sir Snake he dropped a bronze sword");
+                player.bronzeSword = true;
             }
             else if (randomNumber == 3)
             {
-                IFightMonster MonsterCat = new FightingMonsters(10, 10, "Monster Cat");
+                IFightMonster MonsterCat = new FightingMonsters(10, 10, "Miss Cat");
                 MonsterCat.Fight(player);
-                player.sword2 = true;
+                Console.WriteLine("After killing Miss Cat you found a silver sword in the corner of the room");
+                player.silverSword = true;
             }
             else if (randomNumber == 4)
             {

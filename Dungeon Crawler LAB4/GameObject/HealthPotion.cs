@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawlerVersion61
 {
-    class HealthPotion : GameObject
+    class HealthPotion : GameObject, IActionable
     {
         private const string Symbol = "H";
 
@@ -19,7 +19,7 @@ namespace DungeonCrawlerVersion61
             return Symbol;
         }
 
-        public override void GetHealthPotion(Player player)
+        public override void Action(Player player)
         {
             Random rnd = new Random();
             int randomNumber = rnd.Next(1, 4);
@@ -41,7 +41,7 @@ namespace DungeonCrawlerVersion61
                 healthPotionSize = 100;
             }
             player.playerHealthPoints = player.playerHealthPoints + healthPotionSize;
-            Console.WriteLine("You incresed your health with " + healthPotionSize + "healthpoints");
+            Console.WriteLine("You incresed your health with " + healthPotionSize + " healthpoints");
             Console.WriteLine("Your current healthpoints is " + player.playerHealthPoints);
 
             Console.ReadKey();
