@@ -14,22 +14,26 @@ namespace DungeonCrawlerVersion61
         {
             return Symbol;
         }
-        //public override void TryOpenDoor(Position pos, Player player)
+
+        //public override void DoorAction(Player player, Map map)
         //{
-        //    if (pos.Horizontal == 2 && pos.Vertical == 3 && player.normalKey == true || pos.Horizontal == 7 && pos.Vertical == 4 && player.normalKey == true)
+        //    //var gameObject = map.gameObjects.Where(go => go.horizontal == player.position.Horizontal && go.vertical == player.position.Vertical).FirstOrDefault();
+        //
+        //    if (player.position.Horizontal == 2 && player.position.Vertical == 3 && player.normalKey == true || player.position.Horizontal == 7 && player.position.Vertical == 4 && player.normalKey == true)
         //    {
         //        Console.WriteLine("You opened the door");
         //        Console.ReadKey();
         //        player.normalKey = false;
+        //        map.gameObjects.Remove(gameObject);
         //    }
-        //    else if (pos.Horizontal == 6 && pos.Vertical == 8 && player.redKey == true)
+        //    else if (player.position.Horizontal == 6 && player.position.Vertical == 8 && player.redKey == true)
         //    {
         //        Console.WriteLine("You opened the door");
         //        Console.ReadKey();
         //        player.redKey = false;
-        //        //gameObjects.Remove(gameObject);
+        //        map.gameObjects.Remove(gameObject);
         //    }
-        //    else if (pos.Horizontal == 10 && pos.Vertical == 9 && player.blueKey == true)
+        //    else if (player.position.Horizontal == 10 && player.position.Vertical == 9 && player.blueKey == true)
         //    {
         //        Console.WriteLine("You opened the door");
         //        Console.ReadKey();
@@ -40,7 +44,7 @@ namespace DungeonCrawlerVersion61
         //    {
         //        Console.WriteLine("The door is locked. Go and find a key to open it");
         //        Console.ReadKey();
-        //        //return true;
+        //
         //    }
         //}
     }

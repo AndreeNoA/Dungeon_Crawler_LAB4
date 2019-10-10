@@ -23,17 +23,17 @@ namespace DungeonCrawlerVersion61
 
 
 
-        private List<GameObject> gameObjects { get; set; }
+        public List<GameObject> gameObjects { get; set; }
 
         public void PrintMap(Player player)
         {
-            for (int v = 0; v < exploredSquares.GetLength(0); v++)
+            for (int vertical = 0; vertical < exploredSquares.GetLength(0); vertical++)
             {
-                for (int h = 0; h < exploredSquares.GetLength(1); h++)
+                for (int horizontal = 0; horizontal < exploredSquares.GetLength(1); horizontal++)
                 {
-                    var gameObject = gameObjects.Where(go => go.horizontal == h && go.vertical == v).FirstOrDefault();
+                    var gameObject = gameObjects.Where(go => go.horizontal == horizontal && go.vertical == vertical).FirstOrDefault();
 
-                    if (player.position.Vertical == v && player.position.Horizontal == h)
+                    if (player.position.Vertical == vertical && player.position.Horizontal == horizontal)
                     {
                         Console.Write("@");
                     }
@@ -41,7 +41,7 @@ namespace DungeonCrawlerVersion61
                     {
                         Console.Write("#");
                     }
-                    else if (ShouldWeRenderGameObject(player, h, v))
+                    else if (ShouldWeRenderGameObject(player, horizontal, vertical))
                     {
                         if(gameObject == null)
                         {
@@ -54,7 +54,7 @@ namespace DungeonCrawlerVersion61
                             if (gameObject is InnerWall)
                             {
                                 gameObjects.Remove(gameObject);
-                                gameObjects.Add(new Wall(h, v));
+                                gameObjects.Add(new Wall(horizontal, vertical));
                             }
                         }                        
                     }
@@ -62,29 +62,26 @@ namespace DungeonCrawlerVersion61
                     {
                         Console.Write(" ");
                     }
-
                 }
                 Console.WriteLine("");
-            }
-            
+            }            
         }
 
-
-        private bool ShouldWeRenderGameObject(Player player, int h, int v)
+        private bool ShouldWeRenderGameObject(Player player, int horizontal, int vertical)
         {
-            if ((player.position.Vertical - 1) == v && player.position.Horizontal == h)
+            if ((player.position.Vertical - 1) == vertical && player.position.Horizontal == horizontal)
             {
                 return true;
             }
-            else if (player.position.Vertical == v && (player.position.Horizontal + 1) == h)
+            else if (player.position.Vertical == vertical && (player.position.Horizontal + 1) == horizontal)
             {
                 return true;
             }
-            else if ((player.position.Vertical + 1) == v && player.position.Horizontal == h)
+            else if ((player.position.Vertical + 1) == vertical && player.position.Horizontal == horizontal)
             {
                 return true;
             }
-            else if (player.position.Vertical == v && (player.position.Horizontal - 1) == h)
+            else if (player.position.Vertical == vertical && (player.position.Horizontal - 1) == horizontal)
             {
                 return true;
             }           
@@ -92,155 +89,49 @@ namespace DungeonCrawlerVersion61
             return false;
         }
 
-        public bool IsWallOnPosition(Position pos)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-
-            if(gameObject != null && gameObject.GetSymbol() == "#")
-            {
-                return true;
-            }
-
-            return false;
-        }
-        public bool IsMonsterOnPosition(Position pos, Player player)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-
-            if(gameObject != null && gameObject.GetSymbol() == "M")
-            {
-                gameObject.Action(player);
-                gameObjects.Remove(gameObject);                
-                return true;
-            }
-            return false;
-        }
-
-        public bool IsHealthPotOnPosition(Position pos, Player player)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-
-            if (gameObject != null && gameObject.GetSymbol() == "H")
-            {
-                gameObject.GetHealthPotion(player);
-
-                gameObjects.Remove(gameObject);
-                return true;
-            }
-            return false;
-        }
-
-        public bool IsChestOnPosition(Position pos, Player player)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-
-            if (gameObject != null && gameObject.GetSymbol() == "C")
-            {
-                gameObject.GetKeyFromChest(player);
-
-                gameObjects.Remove(gameObject);
-                return true;
-            }
-            return false;
-        }
-
-        public bool IsDoorOnPosition(Position pos, Player player)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-
-            if (gameObject != null && gameObject.GetSymbol() == "D")
-            {
-
-                //gameObject.TryOpenDoor(pos,player);
-
-                //return true;
-                //}
-                //return false;
-                if (pos.Horizontal == 2 && pos.Vertical == 3 && player.normalKey == true || pos.Horizontal == 7 && pos.Vertical == 4 && player.normalKey == true)
-                {
-                    Console.WriteLine("You opened the door");
-                    Console.ReadKey();
-                    player.normalKey = false;
-                    gameObjects.Remove(gameObject);
-                }
-                else if (pos.Horizontal == 6 && pos.Vertical == 8 && player.redKey == true)
-                {
-                    Console.WriteLine("You opened the door");
-                    Console.ReadKey();
-                    player.redKey = false;
-                    gameObjects.Remove(gameObject);
-                }
-                else if (pos.Horizontal == 10 && pos.Vertical == 9 && player.blueKey == true)
-                {
-                    Console.WriteLine("You opened the door");
-                    Console.ReadKey();
-                    player.blueKey = false;
-                    gameObjects.Remove(gameObject);
-                }
-                else
-                {
-                    Console.WriteLine("The door is locked. Go and find a key to open it");
-                    Console.ReadKey();
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool IsTrapOnPosition(Position pos, Player player)
-        {
-            var gameObject = gameObjects.Where(go => go.horizontal == pos.Horizontal && go.vertical == pos.Vertical).FirstOrDefault();
-            if (gameObject != null && gameObject.GetSymbol() == "T")
-            {
-                gameObject.WalkingOnTrap(player);
-                return true;
-            }
-            return false;
-        }
-
         public static Map CreateMap()
         {
             var map = new Map();
             map.gameObjects = new List<GameObject>();
-            for (int v = 0; v < exploredSquares.GetLength(0); v++)
+            for (int vertical = 0; vertical < exploredSquares.GetLength(0); vertical++)
             {
-                for (int h = 0; h < exploredSquares.GetLength(1); h++)
+                for (int horizontal = 0; horizontal < exploredSquares.GetLength(1); horizontal++)
                 {
-                    if (exploredSquares[v, h] == '#')
+                    if (exploredSquares[vertical, horizontal] == '#')
                     {
-                        map.gameObjects.Add(new Wall(h, v));
+                        map.gameObjects.Add(new Wall(horizontal, vertical));
                     }
-                    else if (exploredSquares[v, h] == 'T')
+                    else if (exploredSquares[vertical, horizontal] == 'T')
                     {
-                        map.gameObjects.Add(new Trap(h, v));
+                        map.gameObjects.Add(new Trap(horizontal, vertical));
                     }
-                    else if (exploredSquares[v, h] == 'D')
+                    else if (exploredSquares[vertical, horizontal] == 'D')
                     {
-                        map.gameObjects.Add(new Door(h, v));
+                        map.gameObjects.Add(new Door(horizontal, vertical));
                     }
-                    else if (exploredSquares[v, h] == 'M')
+                    else if (exploredSquares[vertical, horizontal] == 'M')
                     {
-                        map.gameObjects.Add(new Monster(h, v));
+                        map.gameObjects.Add(new Monster(horizontal, vertical));
                     }
-                    else if (exploredSquares[v, h] == 'C')
+                    else if (exploredSquares[vertical, horizontal] == 'C')
                     {
-                        map.gameObjects.Add(new Chest(h, v));
+                        map.gameObjects.Add(new Chest(horizontal, vertical));
                     }
-                    else if (exploredSquares[v, h] == 'H')
+                    else if (exploredSquares[vertical, horizontal] == 'H')
                     {
-                        map.gameObjects.Add(new HealthPotion(h, v));
+                        map.gameObjects.Add(new HealthPotion(horizontal, vertical));
                     }
-                    else if (exploredSquares[v, h] == 'E')
+                    else if (exploredSquares[vertical, horizontal] == 'E')
                     {
-                        map.gameObjects.Add(new Entrance(h, v));
+                        map.gameObjects.Add(new Entrance(horizontal, vertical));
                     }
-                    else if (exploredSquares[v, h] == 'G')
+                    else if (exploredSquares[vertical, horizontal] == 'G')
                     {
-                        map.gameObjects.Add(new Goal(h, v));
+                        map.gameObjects.Add(new Goal(horizontal, vertical));
                     }
-                    else if (exploredSquares[v, h] == 'I')
+                    else if (exploredSquares[vertical, horizontal] == 'I')
                     {
-                        map.gameObjects.Add(new InnerWall(h, v));
+                        map.gameObjects.Add(new InnerWall(horizontal, vertical));
                     }
                 }                
             }

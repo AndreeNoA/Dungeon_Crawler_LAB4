@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawlerVersion61
 {
-    class Goal : GameObject
+    class Goal : GameObject, IActionable
     {
         private const string Symbol = "G";
 
@@ -17,6 +17,12 @@ namespace DungeonCrawlerVersion61
         public override string GetSymbol()
         {
             return Symbol;
+        }
+
+        EndOfGame endGame = new EndOfGame();
+        public override void Action(Player player)
+        {
+            endGame.Actemdion(player);
         }
     }
 }
