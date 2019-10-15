@@ -8,15 +8,15 @@ namespace DungeonCrawlerVersion61.Monsters
 {
     class MonsterBase
     {
-        public int Damage { get; set; }
-        public int Health { get; set; }
-        public string Name { get; set; }
+        public int monsterDamage { get; set; }
+        public int monsterHealth { get; set; }
+        public string monsterName { get; set; }
 
-        public MonsterBase(int Damage, int Health, string Name)
+        public MonsterBase(int monsterDamage, int monsterHealth, string monsterName)
         {
-            this.Damage = Damage;
-            this.Health = Health;
-            this.Name = Name;
+            this.monsterDamage = monsterDamage;
+            this.monsterHealth = monsterHealth;
+            this.monsterName = monsterName;
         }
 
 

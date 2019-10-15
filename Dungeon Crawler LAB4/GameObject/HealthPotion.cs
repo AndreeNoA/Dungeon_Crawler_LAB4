@@ -10,7 +10,7 @@ namespace DungeonCrawlerVersion61
     {
         private const string Symbol = "H";
 
-        public HealthPotion(int h, int v) : base(h, v)
+        public HealthPotion(int horizontal, int vertical) : base(horizontal, vertical)
         {
 
         }
@@ -21,8 +21,8 @@ namespace DungeonCrawlerVersion61
 
         public override void Action(Player player)
         {
-            Random rnd = new Random();
-            int randomNumber = rnd.Next(1, 4);
+            Random random = new Random();
+            int randomNumber = random.Next(1, 4);
             int healthPotionSize = 0;
             if(randomNumber == 1)
             {
@@ -41,12 +41,9 @@ namespace DungeonCrawlerVersion61
                 healthPotionSize = 100;
             }
             player.playerHealthPoints = player.playerHealthPoints + healthPotionSize;
-            Console.WriteLine("You incresed your health with " + healthPotionSize + " healthpoints");
-            Console.WriteLine("Your current healthpoints is " + player.playerHealthPoints);
-
-            Console.ReadKey();
-
-
+            Console.WriteLine("You increased your health with " + healthPotionSize + " healthpoints");
+            Console.WriteLine("Your current healthpoints are " + player.playerHealthPoints);
+            Console.ReadKey(true);
         }
     }
 }

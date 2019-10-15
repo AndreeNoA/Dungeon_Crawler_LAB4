@@ -27,10 +27,5 @@ namespace DungeonCrawlerVersion61
         {
             
         }
-
-        public virtual void EndGame(Player player)
-        {
-
-        }
     }
 }
