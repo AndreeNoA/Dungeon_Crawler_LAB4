@@ -33,7 +33,7 @@ namespace DungeonCrawlerVersion61
                 {
                     var gameObject = gameObjects.Where(go => go.horizontal == horizontal && go.vertical == vertical).FirstOrDefault();
 
-                    if (player.position.Vertical == vertical && player.position.Horizontal == horizontal)
+                    if (player.position.vertical == vertical && player.position.horizontal == horizontal)
                     {
                         Console.Write("@");
                     }
@@ -69,19 +69,19 @@ namespace DungeonCrawlerVersion61
 
         private bool ShouldWeRenderGameObject(Player player, int horizontal, int vertical)
         {
-            if ((player.position.Vertical - 1) == vertical && player.position.Horizontal == horizontal)
+            if ((player.position.vertical - 1) == vertical && player.position.horizontal == horizontal)
             {
                 return true;
             }
-            else if (player.position.Vertical == vertical && (player.position.Horizontal + 1) == horizontal)
+            else if (player.position.vertical == vertical && (player.position.horizontal + 1) == horizontal)
             {
                 return true;
             }
-            else if ((player.position.Vertical + 1) == vertical && player.position.Horizontal == horizontal)
+            else if ((player.position.vertical + 1) == vertical && player.position.horizontal == horizontal)
             {
                 return true;
             }
-            else if (player.position.Vertical == vertical && (player.position.Horizontal - 1) == horizontal)
+            else if (player.position.vertical == vertical && (player.position.horizontal - 1) == horizontal)
             {
                 return true;
             }           

@@ -10,7 +10,7 @@ namespace DungeonCrawlerVersion61
     {
         private const string Symbol = "G";
 
-        public Goal(int h, int v) : base(h, v)
+        public Goal(int horizontal, int vertical) : base(horizontal, vertical)
         {
 
         }
@@ -22,7 +22,7 @@ namespace DungeonCrawlerVersion61
         EndOfGame endGame = new EndOfGame();
         public override void Action(Player player)
         {
-            endGame.Actemdion(player);
+            endGame.EndingGame(player);
         }
     }
 }

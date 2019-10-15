@@ -10,7 +10,7 @@ namespace DungeonCrawlerVersion61
     {
         private const string Symbol = "C";
 
-        public Chest(int h, int v) : base(h, v)
+        public Chest(int horizontal, int vertical) : base(horizontal, vertical)
         {
 
         }
@@ -21,22 +21,22 @@ namespace DungeonCrawlerVersion61
 
         public override void Action(Player player)
         {
-            if (player.position.Horizontal == 1 && player.position.Vertical == 5 || player.position.Horizontal == 7 && player.position.Vertical == 3)
+            if (player.position.horizontal == 1 && player.position.vertical == 5 || player.position.horizontal == 7 && player.position.vertical == 3)
             {
                 Console.WriteLine("You picked up a normal key");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 player.normalKey = true;
             }
-            else if (player.position.Horizontal == 1 && player.position.Vertical == 9)
+            else if (player.position.horizontal == 1 && player.position.vertical == 9)
             {
                 Console.WriteLine("You picked up a red key.");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 player.redKey = true;
             }
-            else if (player.position.Horizontal == 5 && player.position.Vertical == 10)
+            else if (player.position.horizontal == 5 && player.position.vertical == 10)
             {
                 Console.WriteLine("You picked up a blue key.");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 player.blueKey = true;
             }
         }

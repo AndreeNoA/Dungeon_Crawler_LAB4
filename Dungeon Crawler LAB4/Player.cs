@@ -47,7 +47,7 @@ namespace DungeonCrawlerVersion61
         {
             while (true)
             {
-                var input = Console.ReadKey();
+                var input = Console.ReadKey(true);
                 Console.WriteLine();
                 if (!IsValidMovementInput(input.Key))
                 {
@@ -57,7 +57,7 @@ namespace DungeonCrawlerVersion61
                 }
 
                 var newPosition = GetNewPositionFromMovement(input.Key, this.position);
-                var gameObject = map.gameObjects.Where(go => go.horizontal == newPosition.Horizontal && go.vertical == newPosition.Vertical).FirstOrDefault();
+                var gameObject = map.gameObjects.Where(go => go.horizontal == newPosition.horizontal && go.vertical == newPosition.vertical).FirstOrDefault();
 
                 if (gameObject is Wall)
                 {
@@ -70,31 +70,31 @@ namespace DungeonCrawlerVersion61
                 }
                 if (gameObject is Door)
                 {
-                    if (newPosition.Horizontal == 2 && newPosition.Vertical == 3 && normalKey == true || newPosition.Horizontal == 7 && newPosition.Vertical == 4 && normalKey == true)
+                    if (newPosition.horizontal == 2 && newPosition.vertical == 3 && normalKey == true || newPosition.horizontal == 7 && newPosition.vertical == 4 && normalKey == true)
                     {
                         Console.WriteLine("You opened the door");
-                        Console.ReadKey();
+                        Console.ReadKey(true);
                         normalKey = false;
                         map.gameObjects.Remove(gameObject);
                     }
-                    else if (newPosition.Horizontal == 6 && newPosition.Vertical == 8 && redKey == true)
+                    else if (newPosition.horizontal == 6 && newPosition.vertical == 8 && redKey == true)
                     {
-                        Console.WriteLine("You opened the door");
-                        Console.ReadKey();
+                        Console.WriteLine("You opened the red door");
+                        Console.ReadKey(true);
                         player.redKey = false;
                         map.gameObjects.Remove(gameObject);
                     }
-                    else if (newPosition.Horizontal == 10 && newPosition.Vertical == 9 && blueKey == true)
+                    else if (newPosition.horizontal == 10 && newPosition.vertical == 9 && blueKey == true)
                     {
-                        Console.WriteLine("You opened the door");
-                        Console.ReadKey();
+                        Console.WriteLine("You opened the blue door");
+                        Console.ReadKey(true);
                         player.blueKey = false;
                         map.gameObjects.Remove(gameObject);
                     }
                     else
                     {
                         Console.WriteLine("The door is locked. Go and find a key to open it");
-                        Console.ReadKey();
+                        Console.ReadKey(true);
                         return;
                     }
                 }
@@ -112,26 +112,26 @@ namespace DungeonCrawlerVersion61
             }            
         }
 
-        private bool IsValidMovementInput(ConsoleKey input)
+        private bool IsValidMovementInput(ConsoleKey playerInput)
         {
-            return input == ConsoleKey.W || input == ConsoleKey.D || input == ConsoleKey.S || input == ConsoleKey.A;
+            return playerInput == ConsoleKey.W || playerInput == ConsoleKey.D || playerInput == ConsoleKey.S || playerInput == ConsoleKey.A;
         }
 
-        private Position GetNewPositionFromMovement(ConsoleKey input, Position position)
+        private Position GetNewPositionFromMovement(ConsoleKey playerInput, Position position)
         {
-            switch (input)
+            switch (playerInput)
             {
                 case ConsoleKey.W:
-                    return new Position(position.Horizontal, position.Vertical - 1);
+                    return new Position(position.horizontal, position.vertical - 1);
                     
                 case ConsoleKey.D:
-                    return new Position(position.Horizontal + 1, position.Vertical);
+                    return new Position(position.horizontal + 1, position.vertical);
                     
                 case ConsoleKey.S:
-                    return new Position(position.Horizontal, position.Vertical + 1);
+                    return new Position(position.horizontal, position.vertical + 1);
                     
                 case ConsoleKey.A:
-                    return new Position(position.Horizontal -1, position.Vertical);
+                    return new Position(position.horizontal -1, position.vertical);
                     
             }
             //This should never happend...
@@ -142,7 +142,7 @@ namespace DungeonCrawlerVersion61
         {
             if (bronzeSword == true && silverSword == true)
             {
-                Console.WriteLine("You have combined two swords, and now have the golden sword");
+                Console.WriteLine("You have combined a bronze and a silver sword, and now have the golden sword");
             }
             else if (bronzeSword == true)
             {
@@ -168,6 +168,5 @@ namespace DungeonCrawlerVersion61
                 Console.WriteLine("You have a normal key");
             }
         }
-
     }
 }

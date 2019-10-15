@@ -8,7 +8,7 @@ namespace DungeonCrawlerVersion61
     {
         private const string Symbol = "#";
 
-        public Wall(int h, int v) : base(h,v)
+        public Wall(int horizontal, int vertical) : base(horizontal, vertical)
         {
 
         }

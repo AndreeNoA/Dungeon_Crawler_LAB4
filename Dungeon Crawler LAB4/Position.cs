@@ -8,13 +8,13 @@ namespace DungeonCrawlerVersion61
 {
     public class Position
     {
-        public int Horizontal { get; set; }
-        public int Vertical { get; set; }
+        public int horizontal { get; set; }
+        public int vertical { get; set; }
 
-        public Position(int h, int v)
+        public Position(int horizontal, int vertical)
         {
-            this.Horizontal = h;
-            this.Vertical = v;            
+            this.horizontal = horizontal;
+            this.vertical = vertical;            
         }
     }
 }
